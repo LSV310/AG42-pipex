@@ -17,13 +17,13 @@ NAME		= pipex
 
 all: $(NAME)
 
-bonus: $(BONUS_NAME)
+# bonus: $(BONUS_NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
-$(BONUS_NAME): $(LIBFT) $(BONUS_OBJ)
-	$(CC) $(CFLAGS) $(BONUS_OBJ) $(LIBFT) -o $(BONUS_NAME)
+# $(BONUS_NAME): $(LIBFT) $(BONUS_OBJ)
+# 	$(CC) $(CFLAGS) $(BONUS_OBJ) $(LIBFT) -o $(BONUS_NAME)
 
 $(LIBFT):
 	make -sC $(LIBFT_DIR)
@@ -37,7 +37,8 @@ clean:
 	@make clean -sC $(LIBFT_DIR)
 
 fclean: clean
-	rm -rf $(NAME) $(BONUS_NAME)
+	rm -rf $(NAME)
+#	rm -rf $(NAME) $(BONUS_NAME)
 	make fclean -sC libft
 
 re: fclean all
