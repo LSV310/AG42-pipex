@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_fprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 13:16:23 by agruet            #+#    #+#             */
-/*   Updated: 2024/12/19 13:11:03 by agruet           ###   ########.fr       */
+/*   Created: 2024/12/19 13:02:03 by agruet            #+#    #+#             */
+/*   Updated: 2024/12/19 13:29:23 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	print_normal_chars(const char *s, int *current)
+static int	print_normal_chars(const char *s, int *current, int fd)
 {
 	int	start;
 	int	len;
@@ -21,35 +21,35 @@ static int	print_normal_chars(const char *s, int *current)
 	while (s[*current] && s[*current] != '%')
 		(*current)++;
 	len = *current - start;
-	write(1, &s[start], len);
+	write(fd, &s[start], len);
 	return (len);
 }
 
-static int	get_conversion(char c, va_list ap)
+static int	get_conversion(char c, va_list ap, int fd)
 {
 	if (c == 'c')
-		return (ft_putchar_len(va_arg(ap, int)));
+		return (ft_putchar_len_fd(va_arg(ap, int), fd));
 	else if (c == 's')
-		return (ft_putstr_len(va_arg(ap, char *)));
+		return (ft_putstr_len_fd(va_arg(ap, char *), fd));
 	else if (c == 'p')
-		return (ft_printptr(va_arg(ap, unsigned long long)));
+		return (ft_printptr_fd(va_arg(ap, unsigned long long), fd));
 	else if (c == 'd' || c == 'i')
-		return (ft_putnbr_base_len(va_arg(ap, int), BASE_10, 10));
+		return (ft_putnbr_base_len_fd(va_arg(ap, int), BASE_10, 10, fd));
 	else if (c == 'u')
-		return (ft_putnbr_base(va_arg(ap, unsigned int), BASE_10, 10));
+		return (ft_putnbr_base_fd(va_arg(ap, unsigned int), BASE_10, 10, fd));
 	else if (c == 'x')
-		return (ft_putnbr_base(va_arg(ap, unsigned int), BASE_16L, 16));
+		return (ft_putnbr_base_fd(va_arg(ap, unsigned int), BASE_16L, 16, fd));
 	else if (c == 'X')
-		return (ft_putnbr_base(va_arg(ap, unsigned int), BASE_16U, 16));
+		return (ft_putnbr_base_fd(va_arg(ap, unsigned int), BASE_16U, 16, fd));
 	else if (c == '%')
-		return (ft_putchar_len('%'));
+		return (ft_putchar_len_fd('%', fd));
 	else if (c == 0)
 		return (0);
 	else
-		return (ft_putchar_len('%') + ft_putchar_len(c));
+		return (ft_putchar_len_fd('%', fd) + ft_putchar_len_fd(c, fd));
 }
 
-int	ft_printf(const char *s, ...)
+int	ft_fprintf(int fd, const char *s, ...)
 {
 	va_list	ap;
 	int		len;
@@ -64,14 +64,14 @@ int	ft_printf(const char *s, ...)
 	{
 		if (s[current] == '%')
 		{
-			len += get_conversion(s[current + 1], ap);
+			len += get_conversion(s[current + 1], ap, fd);
 			if (s[current + 1])
 				current += 2;
 			else
 				current += 1;
 		}
 		else
-			len += print_normal_chars(s, &current);
+			len += print_normal_chars(s, &current, fd);
 	}
 	va_end(ap);
 	return (len);

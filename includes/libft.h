@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2024/12/18 11:58:31 by agruet           ###   ########.fr       */
+/*   Updated: 2024/12/19 13:18:32 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
+void	free_content(void *content);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
@@ -87,6 +88,14 @@ int		ft_putstr_len(char *s);
 int		ft_putnbr_base(unsigned int n, char *base, unsigned int base_len);
 int		ft_putnbr_base_len(int n, char *base, int base_len);
 int		ft_printptr(unsigned long long ptr);
+
+// fprintf
+int		ft_fprintf(int fd, const char *s, ...);
+int		ft_putchar_len_fd(int c, int fd);
+int		ft_putstr_len_fd(char *s, int fd);
+int		ft_putnbr_base_fd(unsigned int n, char *base, int base_len, int fd);
+int		ft_putnbr_base_len_fd(int n, char *base, int base_len, int fd);
+int		ft_printptr_fd(unsigned long long ptr, int fd);
 
 // get_next_line
 # ifndef BUFFER_SIZE
