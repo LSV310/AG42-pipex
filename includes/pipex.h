@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:32:21 by agruet            #+#    #+#             */
-/*   Updated: 2024/12/18 17:34:03 by agruet           ###   ########.fr       */
+/*   Updated: 2024/12/30 12:54:36 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include <fcntl.h>
+# include <sys/wait.h>
 
 #endif
 
