@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2024/12/31 17:11:06 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/02 16:21:24 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	free_cmd(char *cmd, char **args)
 void	exec_cmd(char *str, pid_t *pid, int *pipefd)
 {
 	char	*cmd;
-	char	**args;
-	char	*envp[1] = {NULL};
+	char	**args;	char	*envp[1] = {NULL};
 
 	args = ft_split(str, ' ');
 	cmd = ft_strjoin("/bin/", args[0]);
@@ -55,7 +54,6 @@ int	main(int ac, char **av)
 	int		fd2;
 	pid_t	pid;
 
-	pipe(pipefd);
 	if (ac < 5)
 		return (ft_putstr_fd("Error, arguments missing\n", 2), 1);
 
@@ -64,15 +62,23 @@ int	main(int ac, char **av)
 		ft_printf("No such file or directory.\n");
 	fd2 = open(av[4], O_RDWR);
 
+	pipe(pipefd);
 	dup2(fd1, pipefd[0]);
+	dup2(fd2, pipefd[1]);
 	close(fd1);
+	close(fd2);
+
+	// close(pipefd[0]);
+	// close(pipefd[1]);
 	exec_cmd(av[2], &pid, pipefd);
 	wait(NULL);
-	dup2(pipefd[0], pipefd[1]);
-	dup2(fd2, pipefd[1]);
-	close(fd2);
+	// ft_fprintf(1, "---\n%s---\n", get_next_line((pipefd[1])));
+
+	// close(pipefd[0]);
+	close(pipefd[1]);
 	exec_cmd(av[3], &pid, pipefd);
 	wait(NULL);
+
 	close(pipefd[0]);
 	close(pipefd[1]);
 }
