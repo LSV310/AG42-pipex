@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/03 12:20:07 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/03 12:31:53 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int ac, char **av)
 	fd1 = open(av[1], O_RDONLY);
 	if (fd1 == -1)
 		ft_printf("No such file or directory.\n");
-	fd2 = open(av[4], O_WRONLY | O_CREAT | O_TRUNC);
+	fd2 = open(av[4], O_WRONLY | O_CREAT | O_TRUNC); // 0644 pour les perms mais faut investiguer
 
 	pipe(pipefd);
 	dup2(fd1, STDIN_FILENO);
