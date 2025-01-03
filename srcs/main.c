@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/03 12:31:53 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/03 15:08:44 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,21 @@ void	free_cmd(char *cmd, char **args)
 	free(cmd);
 }
 
-void	exec_cmd(char *str, pid_t *pid, int *pipefd)
+void	exec_cmd(char *str, int *pipefd)
 {
 	char	*cmd;
 	char	**args;
 	char	*envp[1];
+	pid_t	pid;
 
 	args = ft_split(str, ' ');
 	cmd = ft_strjoin("/bin/", args[0]);
 	envp[0] = NULL;
 
-	*pid = fork();
-	if (*pid == -1)
+	pid = fork();
+	if (pid == -1)
 		ft_putstr_fd("fork error", 2);
-	else if (*pid == 0)
+	else if (pid == 0)
 	{
 		dup2(pipefd[1], STDOUT_FILENO);
 		execve(cmd, args, envp);
@@ -46,35 +47,39 @@ void	exec_cmd(char *str, pid_t *pid, int *pipefd)
 	return ;
 }
 
- #include <unistd.h>
- #include <stdio.h>
- #include <stdlib.h>
 int	main(int ac, char **av)
 {
 	int		pipefd[2];
+	int		index;
 	int		fd1;
 	int		fd2;
 	pid_t	pid;
 
 	if (ac < 5)
 		return (ft_putstr_fd("Error, arguments missing\n", 2), 1);
-
 	fd1 = open(av[1], O_RDONLY);
 	if (fd1 == -1)
-		ft_printf("No such file or directory.\n");
-	fd2 = open(av[4], O_WRONLY | O_CREAT | O_TRUNC); // 0644 pour les perms mais faut investiguer
-
+		return (perror("open failed"), 1);
+	fd2 = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd2 == -1)
+		return (perror("open failed"), 1);
 	pipe(pipefd);
 	dup2(fd1, STDIN_FILENO);
-
-	exec_cmd(av[2], &pid, pipefd);
+	exec_cmd(av[2], pipefd);
 	wait(NULL);
-
-	dup2(pipefd[0], STDIN_FILENO);
-	dup2(fd2, pipefd[1]);
-	exec_cmd(av[3], &pid, pipefd);
-	wait(NULL);
-
+	index = 3;
+	while (index < ac - 1)
+	{
+		dup2(pipefd[0], STDIN_FILENO);
+		close(pipefd[0]);
+		close(pipefd[1]);
+		pipe(pipefd);
+		if (index == ac - 2)
+			dup2(fd2, pipefd[1]);
+		exec_cmd(av[index], pipefd);
+		wait(NULL);
+		index++;
+	}
 	close(pipefd[0]);
 	close(pipefd[1]);
 	close(fd1);
