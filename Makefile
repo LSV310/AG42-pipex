@@ -10,20 +10,15 @@ OBJ_DIR		= objs/
 
 CFLAGS		+= -I$(INCLUDES)
 
-SRC			= main.c
+SRC			= main.c pipex_utils.c parsed_split.c
 OBJ			= $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))
 
 NAME		= pipex
 
 all: $(NAME)
 
-# bonus: $(BONUS_NAME)
-
 $(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
-
-# $(BONUS_NAME): $(LIBFT) $(BONUS_OBJ)
-# 	$(CC) $(CFLAGS) $(BONUS_OBJ) $(LIBFT) -o $(BONUS_NAME)
 
 $(LIBFT):
 	make -sC $(LIBFT_DIR)
@@ -38,7 +33,6 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
-#	rm -rf $(NAME) $(BONUS_NAME)
 	make fclean -sC libft
 
 re: fclean all
