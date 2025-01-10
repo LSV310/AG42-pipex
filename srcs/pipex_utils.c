@@ -6,13 +6,13 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:18 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/10 12:22:25 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/10 12:42:22 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	trim_args(char **tab)
+void	trim_tab(char **tab)
 {
 	int		i;
 	char	*tmp;

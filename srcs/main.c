@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/10 12:23:34 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/10 12:42:50 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	exec_cmd(char *str, int *pipefd, int *exit_code)
 	args = ft_parsed_split(str, ' ');
 	if (!args)
 		exit(EXIT_FAILURE);
-	trim_args(args);
 	cmd = ft_strjoin("/bin/", args[0]);
 	if (!cmd)
 		(free_cmd(NULL, args), exit(EXIT_FAILURE));

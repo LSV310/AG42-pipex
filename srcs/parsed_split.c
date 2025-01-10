@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:36:03 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/10 12:37:52 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/10 12:42:41 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ char	**ft_parsed_split(char const *s, char c)
 			return (free_tab(tab, i));
 		ft_strlcpy(tab[i++], s + start, end - start + 1);
 	}
+	trim_tab(tab);
 	return (tab);
 }
