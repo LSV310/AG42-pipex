@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:18 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/09 15:38:55 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/10 12:22:25 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,15 @@ void	close_fds(int fd1, int fd2, int fd3, int fd4)
 		close(fd3);
 	if (fd4 >= 0)
 		close(fd4);
+}
+
+void	wait_childs(pid_t pid, int *exit_code)
+{
+	int	status;
+
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		*exit_code = WEXITSTATUS(status);
+	else
+		*exit_code = 1;
 }
