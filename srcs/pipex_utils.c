@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:18 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/10 12:42:22 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/10 17:33:07 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	close_fds(int fd1, int fd2, int fd3, int fd4)
 		close(fd4);
 }
 
-void	wait_childs(pid_t pid, int *exit_code)
+void	wait_child(pid_t pid, int *exit_code)
 {
 	int	status;
 
