@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:32:21 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/10 17:28:13 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/10 22:45:06 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ void	trim_tab(char **tab);
 void	wait_child(pid_t pid, int *exit_code);
 void	free_cmd(char *cmd, char **args);
 void	close_fds(int fd1, int fd2, int fd3, int fd4);
-void	read_output(int fd);
 
 #endif
