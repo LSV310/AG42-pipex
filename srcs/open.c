@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:12:12 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/10 17:34:46 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/13 12:28:17 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int	parse_here_doc(char **av, char **file1)
 void	find_limiter(int fd, char *limiter)
 {
 	char	*gnl;
-	int		len;
-	int		testfd;
+	size_t	len;
 
 	if (!limiter)
 		return ;
