@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:32:21 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/10 22:45:06 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/15 11:51:42 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <stdio.h>
+# include <errno.h>
 
-int		open_files(int ac, char **av, int *fd1, int *fd2, int *pipefd);
+int		open_files(int ac, char **av, int *fds, int *pipefd);
 int		parse_here_doc(char **av, char **file1);
 char	**ft_parsed_split(char const *s, char c);
 void	trim_tab(char **tab);
-void	wait_child(pid_t pid, int *exit_code);
+void	wait_child(pid_t pid, int *exit_code, int last);
 void	free_cmd(char *cmd, char **args);
 void	close_fds(int fd1, int fd2, int fd3, int fd4);
 
