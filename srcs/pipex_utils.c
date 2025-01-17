@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:18 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/15 11:51:45 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/17 09:46:42 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ void	trim_tab(char **tab)
 		tmp = tab[i];
 		tab[i] = ft_strtrim(tab[i], "\"");
 		if (tmp[0] == tab[i][0])
+		{
+			free(tmp);
+			tmp = tab[i];
 			tab[i] = ft_strtrim(tab[i], "\'");
+		}
 		free(tmp);
 		i++;
 	}
@@ -60,6 +64,11 @@ void	wait_child(pid_t pid, int *exit_code, int last)
 {
 	int	status;
 
+	if (pid == 0)
+	{
+		*exit_code = 127;
+		return ;
+	}
 	if (!last)
 		waitpid(pid, &status, WNOHANG);
 	else

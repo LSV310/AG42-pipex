@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/15 11:54:07 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/17 09:58:46 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ pid_t	exec_cmd(char *str, int *pipefd, char **ep)
 	cmd = ft_strjoin("/bin/", args[0]);
 	if (!cmd)
 		(free_cmd(NULL, args), exit(EXIT_FAILURE));
+	if (access(cmd, F_OK | X_OK))
+		return (free_cmd(cmd, args), ft_fprintf(2, "pipex: command not found\n"), 0);
 	pid = fork();
 	if (pid == -1)
-		ft_putstr_fd("fork error", 2);
+		perror("fork fail");
 	else if (pid == 0)
 	{
 		dup2(pipefd[1], STDOUT_FILENO);
