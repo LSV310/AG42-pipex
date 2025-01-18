@@ -10,7 +10,7 @@ OBJ_DIR		= objs/
 
 CFLAGS		+= -I$(INCLUDES)
 
-SRC			= main.c pipex_utils.c parsed_split.c open.c
+SRC			= main.c pipex_utils.c parsed_split.c open.c parse_env.c
 OBJ			= $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))
 
 NAME		= pipex

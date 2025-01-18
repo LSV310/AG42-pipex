@@ -6,32 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:18 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/17 09:46:42 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/18 14:22:29 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
-void	trim_tab(char **tab)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while (tab[i])
-	{
-		tmp = tab[i];
-		tab[i] = ft_strtrim(tab[i], "\"");
-		if (tmp[0] == tab[i][0])
-		{
-			free(tmp);
-			tmp = tab[i];
-			tab[i] = ft_strtrim(tab[i], "\'");
-		}
-		free(tmp);
-		i++;
-	}
-}
 
 void	free_cmd(char *cmd, char **args)
 {

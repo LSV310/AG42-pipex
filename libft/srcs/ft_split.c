@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:18:51 by agruet            #+#    #+#             */
-/*   Updated: 2024/12/10 16:36:46 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/18 10:45:37 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@ void	*free_tab(char **tab, int nb)
 	int	i;
 
 	i = 0;
-	while (i < nb)
-		free(tab[i++]);
+	if (nb == 0)
+	{
+		while (tab[i])
+			free(tab[i++]);
+	}
+	else
+	{
+		while (i < nb)
+			free(tab[i++]);
+	}
 	free(tab);
 	return (NULL);
 }

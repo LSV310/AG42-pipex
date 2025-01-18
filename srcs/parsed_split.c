@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:36:03 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/10 16:54:41 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/18 11:55:16 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,27 @@ static int	count_word(char const *str, char c)
 		skip_quotes((char **)&str);
 	}
 	return (number);
+}
+
+static void	trim_tab(char **tab)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (tab[i])
+	{
+		tmp = tab[i];
+		tab[i] = ft_strtrim(tab[i], "\"");
+		if (tmp[0] == tab[i][0])
+		{
+			free(tmp);
+			tmp = tab[i];
+			tab[i] = ft_strtrim(tab[i], "\'");
+		}
+		free(tmp);
+		i++;
+	}
 }
 
 char	**ft_parsed_split(char const *s, char c)
