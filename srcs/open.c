@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:12:12 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/13 13:48:21 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/20 11:50:52 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "pipex.h"
 
 int	parse_here_doc(char **av, char **file1)
 {

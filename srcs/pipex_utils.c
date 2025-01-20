@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:18 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/18 14:22:29 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/20 11:51:02 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "pipex.h"
 
 void	free_cmd(char *cmd, char **args)
 {

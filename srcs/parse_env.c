@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:22:20 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/18 15:44:16 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/20 11:45:37 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*find_path(char **envp)
 	{
 		path = ft_strnstr(envp[i], "PATH=", 5);
 		if (path)
-			return (path);
+			return (path + 5);
 		i++;
 	}
 	return (NULL);
