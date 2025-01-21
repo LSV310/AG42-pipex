@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:18 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/20 11:51:02 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/21 10:55:21 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	wait_child(pid_t pid, int *exit_code, int last)
 	if (pid == 0)
 	{
 		*exit_code = 127;
+		ft_fprintf(2, "pipex: command not found\n");
 		return ;
 	}
 	if (!last)
