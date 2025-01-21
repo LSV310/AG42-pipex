@@ -6,13 +6,13 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:12:12 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/20 11:50:52 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/21 16:37:37 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	parse_here_doc(char **av, char **file1)
+int	parse_here_doc(char **av, char **file1, int ac, int *pipefd)
 {
 	int	here_doc;
 	int	len;
@@ -23,6 +23,12 @@ int	parse_here_doc(char **av, char **file1)
 		here_doc = 1;
 		if (file1)
 			*file1 = av[2];
+		if (ac <= 5)
+		{
+			ft_fprintf(2, "Error, arguments missing\n");
+			close_fds(pipefd[0], pipefd[1], -1, -1);
+			exit(EXIT_FAILURE);
+		}
 	}
 	else
 	{
@@ -41,6 +47,7 @@ void	find_limiter(int fd, char *limiter)
 	if (!limiter)
 		return ;
 	len = ft_strlen(limiter);
+	ft_printf("> ");
 	gnl = get_next_line(0);
 	while (gnl)
 	{
@@ -52,6 +59,7 @@ void	find_limiter(int fd, char *limiter)
 		}
 		ft_fprintf(fd, gnl);
 		free(gnl);
+		ft_printf("> ");
 		gnl = get_next_line(0);
 	}
 }
@@ -89,7 +97,7 @@ int	open_files(int ac, char **av, int *fds, int *pipefd)
 	int		here_doc;
 	char	*file1;
 
-	here_doc = parse_here_doc(av, &file1);
+	here_doc = parse_here_doc(av, &file1, ac, pipefd);
 	if (!here_doc)
 		open_file1(&fds[0], file1);
 	else

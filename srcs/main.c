@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/21 10:59:04 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/21 16:46:53 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int ac, char **av, char **envp)
 	exit_code = 0;
 	pipe(pipefd);
 	i = open_files(ac, av, fds, pipefd);
-	if (!parse_here_doc(av, NULL))
+	if (!parse_here_doc(av, NULL, ac, pipefd))
 		wait_child(exec_cmd(av[i++], pipefd, envp), &exit_code, 0);
 	while (i < ac - 1)
 	{

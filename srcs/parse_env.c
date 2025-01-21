@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:22:20 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/20 11:45:37 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/21 16:50:39 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static char	*new_cmd(char *old_cmd, char **args)
 {
 	char	*new_cmd;
 
+	if (!old_cmd)
+		return (NULL);
 	new_cmd = ft_strjoin("/", old_cmd);
 	if (!new_cmd)
 		(free_cmd(NULL, args), exit(EXIT_FAILURE));
@@ -42,6 +44,8 @@ static char	*try_path(char *cmd, char **path, int i, char **args)
 {
 	char	*join;
 
+	if (!cmd)
+		return (NULL);
 	join = ft_strjoin(path[i], cmd);
 	if (!join)
 		(free_cmd(cmd, args), free_cmd(NULL, path), exit(EXIT_FAILURE));
