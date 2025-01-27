@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/27 12:01:03 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/27 13:35:05 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ pid_t	exec_cmd(char *str, int *pipefd, char **envp, int *fds)
 	else if (pid == 0)
 	{
 		dup2(pipefd[1], STDOUT_FILENO);
+		close_fds(pipefd[0], pipefd[1], fds[0], fds[1]);
 		execve(cmd, args, envp);
 		perror("pipex");
-		close_fds(pipefd[0], pipefd[1], fds[0], fds[1]);
 		free_cmd(cmd, args);
 		exit(EXIT_FAILURE);
 	}

@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:22:20 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/21 16:50:39 by agruet           ###   ########.fr       */
+/*   Updated: 2025/01/27 13:28:59 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,6 @@ static char	*try_path(char *cmd, char **path, int i, char **args)
 	return (NULL);
 }
 
-static char	*no_env(char *cmd, char **args)
-{
-	char	*temp;
-
-	temp = cmd;
-	cmd = ft_strjoin("/bin", cmd);
-	if (!cmd)
-		(free_cmd(temp, args), exit(EXIT_FAILURE));
-	free(temp);
-	if (!access(cmd, X_OK))
-		return (cmd);
-	return (NULL);
-}
-
 char	*parse_env(char **envp, char *cmd, char **args)
 {
 	char	**path;
@@ -81,7 +67,7 @@ char	*parse_env(char **envp, char *cmd, char **args)
 	cmd = new_cmd(cmd, args);
 	temp = find_path(envp);
 	if (!temp)
-		return (no_env(cmd, args));
+		return (free(cmd), NULL);
 	path = ft_split(temp, ':');
 	if (!path)
 		(free_cmd(cmd, args), exit(EXIT_FAILURE));
